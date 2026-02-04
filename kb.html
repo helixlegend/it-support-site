@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>IT Support — База знаний (FAQ)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f5f7fa;
+      color:#333;
+    }
+
+    /* ===== HEADER ===== */
+    header{
+      background:#1e293b;
+      color:#fff;
+      padding:15px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    header h1{ margin:0; font-size:22px; }
+    nav a{
+      color:#fff;
+      margin-left:20px;
+      text-decoration:none;
+      font-size:14px;
+    }
+    nav a:hover{ text-decoration:underline; }
+
+    /* ===== MAIN ===== */
+    main{
+      max-width:1000px;
+      margin:auto;
+      padding:35px 30px;
+    }
+
+    .title{
+      text-align:center;
+      margin-bottom:20px;
+    }
+    .title h2{ margin:0 0 10px; font-size:28px; }
+    .title p{ margin:0; color:#555; }
+
+    /* ===== SEARCH ===== */
+    .search-box{
+      margin:25px auto 15px;
+      display:flex;
+      gap:10px;
+      max-width:700px;
+    }
+    .search-box input{
+      flex:1;
+      padding:12px 14px;
+      border:1px solid #cbd5e1;
+      border-radius:8px;
+      font-size:14px;
+      outline:none;
+      background:#fff;
+    }
+    .search-box button{
+      padding:12px 16px;
+      border:none;
+      border-radius:8px;
+      background:#2563eb;
+      color:#fff;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .search-box button:hover{ opacity:0.9; }
+
+    /* ===== CATEGORIES ===== */
+    .categories{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      margin:10px 0 25px;
+    }
+    .cat-btn{
+      padding:10px 14px;
+      border:1px solid #cbd5e1;
+      background:#fff;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .cat-btn.active{
+      background:#2563eb;
+      color:#fff;
+      border-color:#2563eb;
+    }
+    .cat-btn:hover{ opacity:0.95; }
+
+    /* ===== FAQ LIST ===== */
+    .faq{
+      display:grid;
+      gap:12px;
+      margin-top:10px;
+    }
+    details{
+      background:#fff;
+      border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.08);
+      padding:12px 14px;
+      border:1px solid #eef2f7;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:bold;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .meta{
+      margin-top:8px;
+      font-size:12px;
+      color:#64748b;
+    }
+    .answer{
+      margin-top:10px;
+      color:#374151;
+      line-height:1.5;
+      font-size:14px;
+    }
+    .answer ol{ margin:8px 0 0 18px; }
+    .answer li{ margin:6px 0; }
+
+    .no-results{
+      display:none;
+      text-align:center;
+      margin:25px 0;
+      color:#64748b;
+      background:#fff;
+      border:1px dashed #cbd5e1;
+      border-radius:10px;
+      padding:18px;
+    }
+
+    /* ===== CHAT CTA ===== */
+    .chat-cta{
+      margin-top:28px;
+      background:#fff;
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.08);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+    }
+    .chat-cta h3{ margin:0 0 6px; color:#2563eb; }
+    .chat-cta p{ margin:0; color:#555; font-size:14px; }
+    .chat-cta a{
+      text-decoration:none;
+      background:#2563eb;
+      color:#fff;
+      padding:12px 16px;
+      border-radius:10px;
+      white-space:nowrap;
+      font-size:14px;
+    }
+    .chat-cta a:hover{ opacity:0.9; }
+
+    /* ===== CHAT BUTTON ===== */
+    .chat-button{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#2563eb;
+      color:#fff;
+      padding:15px 20px;
+      border-radius:50px;
+      text-decoration:none;
+      font-size:14px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    }
+    .chat-button:hover{ opacity:0.9; }
+
+    /* ===== FOOTER ===== */
+    footer{
+      background:#e5e7eb;
+      text-align:center;
+      padding:20px;
+      margin-top:40px;
+      font-size:14px;
+      color:#555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1>IT Support</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="kb.html">База знаний</a>
+      <a href="ticket.html">Создать заявку</a>
+      <a href="status.html">Статус заявки</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="title">
+      <h2>База знаний (FAQ)</h2>
+      <p>Выберите категорию или найдите ответ через поиск.</p>
+    </section>
+
+    <!-- ===== SEARCH ===== -->
+    <div class="search-box">
+      <input id="searchInput" type="text" placeholder="Поиск: например, VPN, Wi-Fi, пароль, принтер..." />
+      <button id="clearBtn" type="button">Очистить</button>
+    </div>
+
+    <!-- ===== CATEGORIES ===== -->
+    <div class="categories" id="categories">
+      <button class="cat-btn active" data-cat="all">Все</button>
+      <button class="cat-btn" data-cat="network">Сеть</button>
+      <button class="cat-btn" data-cat="vpn">VPN</button>
+      <button class="cat-btn" data-cat="mail">Почта</button>
+      <button class="cat-btn" data-cat="account">Учетка</button>
+      <button class="cat-btn" data-cat="software">ПО</button>
+      <button class="cat-btn" data-cat="printer">Принтер</button>
+    </div>
+
+    <!-- ===== FAQ LIST ===== -->
+    <div class="faq" id="faqList">
+
+      <!-- VPN -->
+      <details class="faq-item" data-cat="vpn">
+        <summary>Как подключить VPN?</summary>
+        <div class="meta">Категория: VPN</div>
+        <div class="answer">
+          <ol>
+            <li>Проверь, что интернет работает без VPN.</li>
+            <li>Открой VPN-клиент и выбери профиль компании.</li>
+            <li>Введи логин (пароль не сообщай никому).</li>
+            <li>Нажми «Connect / Подключить».</li>
+            <li>Если появляется ошибка — запиши текст ошибки и обратись в поддержку.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="vpn">
+        <summary>VPN не подключается — что делать?</summary>
+        <div class="meta">Категория: VPN</div>
+        <div class="answer">
+          <ol>
+            <li>Перезапусти VPN-клиент и устройство.</li>
+            <li>Проверь дату/время на компьютере.</li>
+            <li>Попробуй другую сеть (например, мобильный интернет).</li>
+            <li>Если ошибка повторяется — пришли в заявку текст ошибки и скрин.</li>
+          </ol>
+        </div>
+      </details>
+
+      <!-- Network -->
+      <details class="faq-item" data-cat="network">
+        <summary>Нет интернета / Wi-Fi подключен, но сайты не открываются</summary>
+        <div class="meta">Категория: Сеть</div>
+        <div class="answer">
+          <ol>
+            <li>Перезагрузи роутер (если дома) или отключи/включи Wi-Fi.</li>
+            <li>Попробуй открыть 2–3 разных сайта.</li>
+            <li>Отключи VPN и проверь снова.</li>
+            <li>Если на Windows: «Забыть сеть» → подключиться заново.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="network">
+        <summary>Ограниченный доступ к сети (Windows)</summary>
+        <div class="meta">Категория: Сеть</div>
+        <div class="answer">
+          <ol>
+            <li>Открой «Сетевые параметры» и отключи/включи адаптер.</li>
+            <li>Перезагрузи ПК.</li>
+            <li>Если это офисная сеть — создай заявку, указав кабинет/этаж.</li>
+          </ol>
+        </div>
+      </details>
+
+      <!-- Mail -->
+      <details class="faq-item" data-cat="mail">
+        <summary>Не приходит письмо на корпоративную почту</summary>
+        <div class="meta">Категория: Почта</div>
+        <div class="answer">
+          <ol>
+            <li>Проверь папки «Спам» и «Промоакции».</li>
+            <li>Убедись, что ящик не переполнен.</li>
+            <li>Попробуй зайти через веб-версию почты.</li>
+            <li>Если письма нет более 30 минут — создай заявку и укажи отправителя и время.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="mail">
+        <summary>Почта не отправляется (ошибка, зависает отправка)</summary>
+        <div class="meta">Категория: Почта</div>
+        <div class="answer">
+          <ol>
+            <li>Проверь интернет и попробуй отправить без вложений.</li>
+            <li>Проверь размер вложений (иногда есть лимит).</li>
+            <li>Попробуй отправить через веб-почту.</li>
+            <li>Если ошибка остаётся — пришли текст ошибки в поддержку.</li>
+          </ol>
+        </div>
+      </details>
+
+      <!-- Account -->
+      <details class="faq-item" data-cat="account">
+        <summary>Не могу войти в учетную запись (неверный пароль)</summary>
+        <div class="meta">Категория: Учетка</div>
+        <div class="answer">
+          <ol>
+            <li>Проверь CapsLock и раскладку клавиатуры.</li>
+            <li>Попробуй восстановление пароля (если доступно).</li>
+            <li>Если учетку заблокировали — создай заявку (логин + отдел), пароли не отправляй.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="account">
+        <summary>Нужно сменить пароль — как правильно?</summary>
+        <div class="meta">Категория: Учетка</div>
+        <div class="answer">
+          <ol>
+            <li>Используй пароль не короче 10 символов.</li>
+            <li>Добавь буквы верх/низ, цифры и символ.</li>
+            <li>Не используй дату рождения и простые слова.</li>
+            <li>Не повторяй старые пароли.</li>
+          </ol>
+        </div>
+      </details>
+
+      <!-- Software -->
+      <details class="faq-item" data-cat="software">
+        <summary>Нужно установить программу — как сделать заявку?</summary>
+        <div class="meta">Категория: ПО</div>
+        <div class="answer">
+          <ol>
+            <li>Перейди на страницу «Создать заявку».</li>
+            <li>Укажи название программы и версию (если знаешь).</li>
+            <li>Опиши, для чего нужна программа (учеба/работа).</li>
+            <li>Укажи срочность и контакт для связи.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="software">
+        <summary>Windows просит обновление — можно ли откладывать?</summary>
+        <div class="meta">Категория: ПО</div>
+        <div class="answer">
+          Рекомендуется устанавливать обновления, так как они закрывают уязвимости.
+          Если после обновления появились ошибки — создай заявку и укажи дату обновления.
+        </div>
+      </details>
+
+      <!-- Printer -->
+      <details class="faq-item" data-cat="printer">
+        <summary>Принтер не печатает (очередь зависла)</summary>
+        <div class="meta">Категория: Принтер</div>
+        <div class="answer">
+          <ol>
+            <li>Проверь, выбран ли нужный принтер.</li>
+            <li>Очисти очередь печати (удали зависшие задания).</li>
+            <li>Перезапусти принтер и попробуй снова.</li>
+            <li>Если не помогло — создай заявку и укажи модель принтера.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="faq-item" data-cat="printer">
+        <summary>Принтер пишет “Offline”</summary>
+        <div class="meta">Категория: Принтер</div>
+        <div class="answer">
+          <ol>
+            <li>Проверь кабель/подключение к сети.</li>
+            <li>Перезапусти принтер.</li>
+            <li>На ПК открой “Устройства и принтеры” и убери режим “Использовать автономно”.</li>
+          </ol>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="no-results" id="noResults">
+      Ничего не найдено. Попробуй другой запрос или выбери категорию.
+    </div>
+
+    <!-- ===== CHAT CTA ===== -->
+    <div class="chat-cta">
+      <div>
+        <h3>Не нашёл ответ?</h3>
+        <p>Спроси в чате — ИИ-ассистент уточнит детали и предложит решение.</p>
+      </div>
+      <a href="index.html#chat">Открыть чат</a>
+    </div>
+  </main>
+
+  <!-- ===== CHAT BUTTON ===== -->
+  <a href="index.html#chat" class="chat-button">💬 Чат с поддержкой</a>
+
+  <footer>
+    <p>Контакты: support@it-company.kz | +7 (700) 000-00-00</p>
+    <p>© 2026 IT Support. Все права защищены.</p>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const clearBtn = document.getElementById("clearBtn");
+    const catButtons = document.querySelectorAll(".cat-btn");
+    const faqItems = document.querySelectorAll(".faq-item");
+    const noResults = document.getElementById("noResults");
+
+    let activeCat = "all";
+
+    function filterFAQ() {
+      const q = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      faqItems.forEach(item => {
+        const cat = item.dataset.cat;
+        const text = item.innerText.toLowerCase();
+
+        const catOk = (activeCat === "all") || (cat === activeCat);
+        const textOk = !q || text.includes(q);
+
+        const show = catOk && textOk;
+        item.style.display = show ? "block" : "none";
+        if (show) visibleCount++;
+      });
+
+      noResults.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    catButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        catButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeCat = btn.dataset.cat;
+        filterFAQ();
+      });
+    });
+
+    searchInput.addEventListener("input", filterFAQ);
+
+    clearBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      filterFAQ();
+      searchInput.focus();
+    });
+
+    filterFAQ();
+  </script>
+</body>
+</html>

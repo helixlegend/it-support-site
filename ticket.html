@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>IT Support — Создать заявку</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f5f7fa;
+      color:#333;
+    }
+
+    /* ===== HEADER ===== */
+    header{
+      background:#1e293b;
+      color:#fff;
+      padding:15px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    header h1{ margin:0; font-size:22px; }
+    nav a{
+      color:#fff;
+      margin-left:20px;
+      text-decoration:none;
+      font-size:14px;
+    }
+    nav a:hover{ text-decoration:underline; }
+
+    /* ===== MAIN ===== */
+    main{
+      max-width:1000px;
+      margin:auto;
+      padding:35px 30px;
+    }
+
+    .title{
+      text-align:center;
+      margin-bottom:18px;
+    }
+    .title h2{ margin:0 0 10px; font-size:28px; }
+    .title p{ margin:0; color:#555; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap:18px;
+      margin-top:22px;
+    }
+
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background:#fff;
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.08);
+      border:1px solid #eef2f7;
+    }
+
+    /* ===== FORM ===== */
+    form label{
+      display:block;
+      font-size:13px;
+      color:#334155;
+      margin:12px 0 6px;
+    }
+    input, textarea, select{
+      width:100%;
+      box-sizing:border-box;
+      padding:12px 12px;
+      border:1px solid #cbd5e1;
+      border-radius:10px;
+      font-size:14px;
+      outline:none;
+      background:#fff;
+    }
+    textarea{ min-height:120px; resize:vertical; }
+
+    .row2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 520px){
+      .row2{ grid-template-columns: 1fr; }
+    }
+
+    .hint{
+      font-size:12px;
+      color:#64748b;
+      margin-top:6px;
+    }
+
+    .btn{
+      margin-top:14px;
+      width:100%;
+      padding:12px 16px;
+      border:none;
+      border-radius:10px;
+      background:#16a34a;
+      color:#fff;
+      cursor:pointer;
+      font-size:15px;
+    }
+    .btn:hover{ opacity:0.92; }
+
+    .success{
+      display:none;
+      margin-top:14px;
+      background:#ecfdf5;
+      border:1px solid #bbf7d0;
+      color:#065f46;
+      padding:12px 14px;
+      border-radius:10px;
+      font-size:14px;
+    }
+
+    .warn{
+      margin-top:10px;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      color:#9a3412;
+      padding:12px 14px;
+      border-radius:10px;
+      font-size:13px;
+    }
+
+    /* ===== CHAT HELP ===== */
+    .chat-help h3{
+      margin:0 0 10px;
+      color:#2563eb;
+    }
+    .chat-help p{
+      margin:0 0 10px;
+      color:#555;
+      font-size:14px;
+      line-height:1.5;
+    }
+    .quick{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .quick button{
+      width:100%;
+      text-align:left;
+      padding:12px 12px;
+      border-radius:10px;
+      border:1px solid #cbd5e1;
+      background:#fff;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .quick button:hover{ background:#f8fafc; }
+
+    /* ===== CHAT BUTTON (fixed) ===== */
+    .chat-button{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#2563eb;
+      color:#fff;
+      padding:15px 20px;
+      border-radius:50px;
+      text-decoration:none;
+      font-size:14px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    }
+    .chat-button:hover{ opacity:0.9; }
+
+    /* ===== FOOTER ===== */
+    footer{
+      background:#e5e7eb;
+      text-align:center;
+      padding:20px;
+      margin-top:40px;
+      font-size:14px;
+      color:#555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1>IT Support</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="kb.html">База знаний</a>
+      <a href="ticket.html">Создать заявку</a>
+      <a href="status.html">Статус заявки</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="title">
+      <h2>Создать заявку в поддержку</h2>
+      <p>Заполните форму — мы зарегистрируем обращение и свяжемся с вами.</p>
+    </section>
+
+    <div class="grid">
+      <!-- ===== FORM CARD ===== -->
+      <section class="card">
+        <form id="ticketForm">
+          <div class="row2">
+            <div>
+              <label for="fio">ФИО *</label>
+              <input id="fio" name="fio" type="text" placeholder="Например: Ерсултан Н." required />
+            </div>
+
+            <div>
+              <label for="dept">Отдел / группа *</label>
+              <input id="dept" name="dept" type="text" placeholder="Например: ИС-101" required />
+            </div>
+          </div>
+
+          <div class="row2">
+            <div>
+              <label for="contact">Email или телефон *</label>
+              <input id="contact" name="contact" type="text" placeholder="Например: user@mail.com или +7..." required />
+              <div class="hint">Контакт нужен, чтобы уточнить детали. Пароли не указывайте.</div>
+            </div>
+
+            <div>
+              <label for="priority">Приоритет *</label>
+              <select id="priority" name="priority" required>
+                <option value="низкий">Низкий</option>
+                <option value="средний" selected>Средний</option>
+                <option value="высокий">Высокий</option>
+              </select>
+              <div class="hint">Высокий — если работа/учёба полностью остановилась.</div>
+            </div>
+          </div>
+
+          <label for="topic">Тема *</label>
+          <input id="topic" name="topic" type="text" placeholder="Например: VPN не подключается" required />
+
+          <label for="desc">Описание проблемы *</label>
+          <textarea id="desc" name="desc" placeholder="Опишите: что не работает, когда началось, есть ли текст ошибки, что уже пробовали..." required></textarea>
+          <div class="hint">Совет: укажите устройство (ПК/телефон), систему (Windows/Android) и текст ошибки.</div>
+
+          <div class="warn">
+            ⚠️ Важно: не отправляйте пароли, коды из SMS и данные банковских карт.
+          </div>
+
+          <button class="btn" type="submit">Отправить</button>
+
+          <div class="success" id="successBox"></div>
+        </form>
+      </section>
+
+      <!-- ===== CHAT HELP CARD ===== -->
+      <aside class="card chat-help" id="chatHelp">
+        <h3>Чат-бот поможет сформулировать проблему</h3>
+        <p>
+          Нажмите на готовый шаблон — и мы автоматически подставим текст в поля
+          «Тема» и «Описание».
+        </p>
+
+        <div class="quick">
+          <button type="button" data-topic="VPN не подключается"
+            data-desc="Устройство: (ПК/телефон)\nСеть: (дом/офис/моб.интернет)\nТекст ошибки VPN: (если есть)\nИнтернет без VPN работает?: (да/нет)\nЧто уже пробовал(а): перезапуск, другая сеть, проверка времени\nКогда началось: (дата/время)">
+            🔒 VPN не подключается
+          </button>
+
+          <button type="button" data-topic="Нет интернета / проблемы с Wi-Fi"
+            data-desc="Устройство: (ПК/телефон)\nWi-Fi подключен?: (да/нет)\nСайты открываются?: (да/нет)\nЗначок сети: (ограничено/нет доступа)\nЧто пробовал(а): перезапуск роутера, забыть сеть, другая сеть\nГде проблема: (дом/офис)\nКогда началось: (дата/время)">
+            🌐 Нет интернета / Wi-Fi
+          </button>
+
+          <button type="button" data-topic="Проблема с почтой"
+            data-desc="Что не работает: (вход/отправка/получение)\nПисьма попадают в спам?: (да/нет)\nЕсть ли ошибка?: (текст)\nПробовал(а) web-почту?: (да/нет)\nКогда началось: (дата/время)\nДополнительно: отправитель/получатель (без паролей)">
+            ✉️ Почта не работает
+          </button>
+
+          <button type="button" data-topic="Не могу войти в учетную запись"
+            data-desc="Логин/почта: (без пароля)\nСообщение об ошибке: (если есть)\nПроверено: CapsLock/раскладка\nКогда началось: (дата/время)\nНужно: (разблокировать/сбросить пароль/восстановить доступ)">
+            👤 Проблема с учеткой
+          </button>
+
+          <button type="button" data-topic="Не печатает принтер"
+            data-desc="Модель принтера: (если знаете)\nОшибка/сообщение: (если есть)\nПечатает у других?: (да/нет)\nЧто пробовал(а): перезапуск, очередь печати, другой документ\nГде находится принтер: (кабинет/аудитория)\nКогда началось: (дата/время)">
+            🖨️ Принтер не печатает
+          </button>
+        </div>
+
+        <p style="margin-top:12px;">
+          Или открой чат и задай вопрос:
+          <a href="index.html#chat" style="color:#2563eb; text-decoration:none; font-weight:bold;">
+            Перейти в чат
+          </a>
+        </p>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ===== CHAT BUTTON ===== -->
+  <a href="index.html#chat" class="chat-button">💬 Чат с поддержкой</a>
+
+  <footer>
+    <p>Контакты: support@it-company.kz | +7 (700) 000-00-00</p>
+    <p>© 2026 IT Support. Все права защищены.</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById("ticketForm");
+    const successBox = document.getElementById("successBox");
+    const topic = document.getElementById("topic");
+    const desc = document.getElementById("desc");
+
+    // Генерация "номера заявки" (простая, учебная)
+    function makeTicketNumber() {
+      const d = new Date();
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, "0");
+      const dd = String(d.getDate()).padStart(2, "0");
+      const rnd = Math.floor(100 + Math.random() * 900); // 100-999
+      return `IT-${yyyy}${mm}${dd}-${rnd}`;
+    }
+
+    // Кнопки-шаблоны (помощь чат-бота)
+    document.querySelectorAll(".quick button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        topic.value = btn.dataset.topic;
+        desc.value = btn.dataset.desc;
+        topic.focus();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
+    // Отправка формы (без сервера: просто показываем сообщение)
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const ticketNo = makeTicketNumber();
+
+      successBox.style.display = "block";
+      successBox.textContent = `✅ Ваша заявка № ${ticketNo} принята. Мы свяжемся с вами по указанному контакту.`;
+
+      // Можно очистить поля (если нужно)
+      // form.reset();
+    });
+  </script>
+
+</body>
+</html>

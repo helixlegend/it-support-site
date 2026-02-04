@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>IT Support — Статус заявки</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f5f7fa;
+      color:#333;
+    }
+
+    /* ===== HEADER ===== */
+    header{
+      background:#1e293b;
+      color:#fff;
+      padding:15px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    header h1{ margin:0; font-size:22px; }
+    nav a{
+      color:#fff;
+      margin-left:20px;
+      text-decoration:none;
+      font-size:14px;
+    }
+    nav a:hover{ text-decoration:underline; }
+
+    /* ===== MAIN ===== */
+    main{
+      max-width:800px;
+      margin:auto;
+      padding:40px 30px;
+    }
+
+    .title{
+      text-align:center;
+      margin-bottom:20px;
+    }
+    .title h2{ margin:0 0 10px; font-size:28px; }
+    .title p{ margin:0; color:#555; }
+
+    .card{
+      background:#fff;
+      border-radius:12px;
+      padding:22px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.08);
+      border:1px solid #eef2f7;
+    }
+
+    /* ===== FORM ===== */
+    .row{
+      display:flex;
+      gap:10px;
+      margin-top:10px;
+    }
+    .row input{
+      flex:1;
+      padding:12px 14px;
+      border:1px solid #cbd5e1;
+      border-radius:10px;
+      font-size:14px;
+      outline:none;
+    }
+    .row button{
+      padding:12px 18px;
+      border:none;
+      border-radius:10px;
+      background:#2563eb;
+      color:#fff;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .row button:hover{ opacity:0.9; }
+
+    .hint{
+      margin-top:8px;
+      font-size:12px;
+      color:#64748b;
+    }
+
+    /* ===== RESULT ===== */
+    .result{
+      display:none;
+      margin-top:18px;
+      padding:16px;
+      border-radius:10px;
+      font-size:14px;
+    }
+    .processing{
+      background:#eff6ff;
+      border:1px solid #bfdbfe;
+      color:#1e40af;
+    }
+    .resolved{
+      background:#ecfdf5;
+      border:1px solid #bbf7d0;
+      color:#065f46;
+    }
+    .clarify{
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      color:#9a3412;
+    }
+
+    /* ===== CHAT CTA ===== */
+    .chat-cta{
+      margin-top:18px;
+      background:#fff;
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+    }
+    .chat-cta p{
+      margin:0;
+      font-size:14px;
+      color:#555;
+    }
+    .chat-cta a{
+      text-decoration:none;
+      background:#2563eb;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:10px;
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .chat-cta a:hover{ opacity:0.9; }
+
+    /* ===== CHAT BUTTON ===== */
+    .chat-button{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#2563eb;
+      color:#fff;
+      padding:15px 20px;
+      border-radius:50px;
+      text-decoration:none;
+      font-size:14px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    }
+    .chat-button:hover{ opacity:0.9; }
+
+    /* ===== FOOTER ===== */
+    footer{
+      background:#e5e7eb;
+      text-align:center;
+      padding:20px;
+      margin-top:40px;
+      font-size:14px;
+      color:#555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1>IT Support</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="kb.html">База знаний</a>
+      <a href="ticket.html">Создать заявку</a>
+      <a href="status.html">Статус заявки</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="title">
+      <h2>Проверка статуса заявки</h2>
+      <p>Введите номер заявки, который вы получили после отправки.</p>
+    </section>
+
+    <section class="card">
+      <label for="ticketNo" style="font-size:13px;">Номер заявки</label>
+
+      <div class="row">
+        <input id="ticketNo" type="text" placeholder="Например: IT-20260204-123" />
+        <button id="checkBtn" type="button">Проверить</button>
+      </div>
+
+      <div class="hint">
+        Формат номера: IT-ГГГГММДД-XXX
+      </div>
+
+      <div id="resultBox" class="result"></div>
+    </section>
+
+    <!-- ===== CHAT CTA ===== -->
+    <div class="chat-cta">
+      <p>
+        Если статус долго не меняется или нужна помощь —
+        обратитесь к ИИ-ассистенту.
+      </p>
+      <a href="index.html#chat">Спросить у бота</a>
+    </div>
+  </main>
+
+  <!-- ===== CHAT BUTTON ===== -->
+  <a href="index.html#chat" class="chat-button">💬 Чат с поддержкой</a>
+
+  <footer>
+    <p>Контакты: support@it-company.kz | +7 (700) 000-00-00</p>
+    <p>© 2026 IT Support. Все права защищены.</p>
+  </footer>
+
+  <script>
+    const btn = document.getElementById("checkBtn");
+    const input = document.getElementById("ticketNo");
+    const resultBox = document.getElementById("resultBox");
+
+    const statuses = [
+      {
+        key: "processing",
+        text: "⏳ Статус заявки: в обработке. Специалист уже работает над вашим обращением."
+      },
+      {
+        key: "resolved",
+        text: "✅ Статус заявки: решено. Если проблема сохраняется — создайте новую заявку."
+      },
+      {
+        key: "clarify",
+        text: "⚠️ Статус заявки: требуется уточнение. Пожалуйста, проверьте почту или свяжитесь с поддержкой."
+      }
+    ];
+
+    btn.addEventListener("click", () => {
+      const value = input.value.trim();
+
+      if (!value) {
+        resultBox.style.display = "block";
+        resultBox.className = "result clarify";
+        resultBox.textContent = "Введите номер заявки.";
+        return;
+      }
+
+      // Учебная логика: псевдослучайный статус
+      const status = statuses[Math.floor(Math.random() * statuses.length)];
+
+      resultBox.style.display = "block";
+      resultBox.className = "result " + status.key;
+      resultBox.textContent = status.text;
+    });
+  </script>
+
+</body>
+</html>

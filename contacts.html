@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>IT Support — Контакты</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#f5f7fa;
+      color:#333;
+    }
+
+    /* ===== HEADER ===== */
+    header{
+      background:#1e293b;
+      color:#fff;
+      padding:15px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    header h1{ margin:0; font-size:22px; }
+    nav a{
+      color:#fff;
+      margin-left:20px;
+      text-decoration:none;
+      font-size:14px;
+    }
+    nav a:hover{ text-decoration:underline; }
+
+    /* ===== MAIN ===== */
+    main{
+      max-width:900px;
+      margin:auto;
+      padding:40px 30px;
+    }
+
+    .title{
+      text-align:center;
+      margin-bottom:24px;
+    }
+    .title h2{ margin:0 0 10px; font-size:28px; }
+    .title p{ margin:0; color:#555; }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap:18px;
+    }
+
+    .card{
+      background:#fff;
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.08);
+      border:1px solid #eef2f7;
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      color:#2563eb;
+    }
+
+    .item{
+      margin:8px 0;
+      font-size:14px;
+      color:#374151;
+    }
+
+    .item strong{
+      color:#111827;
+    }
+
+    .schedule{
+      margin-top:6px;
+      line-height:1.6;
+    }
+
+    /* ===== RULES ===== */
+    .rules{
+      margin-top:26px;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      border-radius:12px;
+      padding:18px;
+      color:#9a3412;
+      font-size:14px;
+    }
+    .rules h3{
+      margin:0 0 10px;
+      color:#c2410c;
+    }
+    .rules ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .rules li{
+      margin:6px 0;
+    }
+
+    /* ===== CHAT CTA ===== */
+    .chat-cta{
+      margin-top:26px;
+      background:#fff;
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+    }
+    .chat-cta p{
+      margin:0;
+      font-size:14px;
+      color:#555;
+    }
+    .chat-cta a{
+      text-decoration:none;
+      background:#2563eb;
+      color:#fff;
+      padding:12px 16px;
+      border-radius:10px;
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .chat-cta a:hover{ opacity:0.9; }
+
+    /* ===== CHAT BUTTON ===== */
+    .chat-button{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#2563eb;
+      color:#fff;
+      padding:15px 20px;
+      border-radius:50px;
+      text-decoration:none;
+      font-size:14px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    }
+    .chat-button:hover{ opacity:0.9; }
+
+    /* ===== FOOTER ===== */
+    footer{
+      background:#e5e7eb;
+      text-align:center;
+      padding:20px;
+      margin-top:40px;
+      font-size:14px;
+      color:#555;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1>IT Support</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="kb.html">База знаний</a>
+      <a href="ticket.html">Создать заявку</a>
+      <a href="status.html">Статус заявки</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="title">
+      <h2>Контакты службы поддержки</h2>
+      <p>Свяжитесь с нами удобным способом или воспользуйтесь ИИ-ассистентом.</p>
+    </section>
+
+    <section class="cards">
+      <!-- Контакты -->
+      <div class="card">
+        <h3>Связь с поддержкой</h3>
+        <div class="item"><strong>Email:</strong> support@it-company.kz</div>
+        <div class="item"><strong>Телефон:</strong> +7 (700) 000-00-00</div>
+        <div class="item"><strong>Внутренний номер:</strong> 123</div>
+      </div>
+
+      <!-- График -->
+      <div class="card">
+        <h3>График работы</h3>
+        <div class="schedule">
+          Понедельник – Пятница: <strong>09:00 – 18:00</strong><br>
+          Суббота – Воскресенье: <strong>выходной</strong><br>
+          <br>
+          <em>ИИ-чат-бот доступен 24/7</em>
+        </div>
+      </div>
+
+      <!-- Адрес -->
+      <div class="card">
+        <h3>Адрес</h3>
+        <div class="item">
+          Республика Казахстан, г. Алматы<br>
+          ул. Абая, 10<br>
+          IT-отдел, 3 этаж
+        </div>
+      </div>
+    </section>
+
+    <!-- Правила -->
+    <section class="rules">
+      <h3>Правила безопасности</h3>
+      <ul>
+        <li>❌ Не отправляйте пароли, PIN-коды и коды из SMS.</li>
+        <li>❌ Не передавайте данные банковских карт.</li>
+        <li>✅ Указывайте только описание проблемы и контакт для связи.</li>
+        <li>✅ При необходимости прикладывайте скриншоты без конфиденциальных данных.</li>
+      </ul>
+    </section>
+
+    <!-- Чат -->
+    <div class="chat-cta">
+      <p>
+        Есть вопрос? Получите быстрый ответ от ИИ-ассистента поддержки.
+      </p>
+      <a href="index.html#chat">Открыть чат</a>
+    </div>
+  </main>
+
+  <!-- ===== CHAT BUTTON ===== -->
+  <a href="index.html#chat" class="chat-button">💬 Чат с поддержкой</a>
+
+  <footer>
+    <p>© 2026 IT Support. Все права защищены.</p>
+  </footer>
+
+</body>
+</html>
